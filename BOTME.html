@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="DADDY.png">
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
+}
+
+.main {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main .image-container {
+  padding: 10px;
+}
+
+.main .image-container .image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main .image-container .image img {
+  width: 170px;
+  align-items: center;
+}
+
+.main .image-container h1 {
+  color: #00bcd4;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+.main .image-container p {
+  color: #324042;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.main .input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 50px;
+  border-radius: 20px;
+  background: rgb(202 253 255 / 50%);
+}
+
+.main .input .talk {
+  background: transparent;
+  outline: none;
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.main .input .talk i {
+  font-size: 20px;
+  color: #aed0d0;
+}
+
+.main .input .content {
+  color: #aed0d0;
+  font-size: 15px;
+  margin-right: 20px;
+}
+
+</style>
+    <title>SussiBot - Virtual Assistant - AdarProgram</title>
+
+    <!---- CSS Linkage ------>
+    <link rel="stylesheet" href="style.css">
+
+    <!---- Font Awesome Cdn Linkage ------>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body>
+    <section class="main">
+        <div class="image-container">
+            <div class="image">
+                <img src="DADDY.png" alt="image">
+            </div>
+            <h1>Sussibot</h1>
+            <p>I'm a Virtual Assistant how can i help you</p>
+        </div>
+        <div class="input">
+            <button class="talk" id="git"><i class="fas fa-microphone-alt"></i> </button>
+            <h1 class="content"> Click here to speak</h1>
+
+        </div>
+                    <br>
+            <br>
+            <br>
+            <br>
+            <h1 style="color:white;">Adar Natan ©2024</h1>
+    </section>
+
+    <!------- Js Linkage --------->
+    <script>const btn = document.querySelector('.talk');
+const content = document.querySelector('.content');
+
+function speak(sentence) {
+    const text_speak = new SpeechSynthesisUtterance(sentence);
+
+    text_speak.rate = 1;
+    text_speak.pitch = 1;
+
+    window.speechSynthesis.speak(text_speak);
+}
+
+function wishMe() {
+    var day = new Date();
+    var hr = day.getHours();
+
+    if(hr >= 0 && hr < 12) {
+        speak("Good Morning Boss");
+    }
+
+    else if(hr == 12) {
+        speak("Good noon Boss");
+    }
+
+    else if(hr > 12 && hr <= 17) {
+        speak("Good Afternoon Boss");
+    }
+
+    else {
+        speak("Good Evening Boss");
+    }
+}
+
+window.addEventListener('load', ()=>{
+
+    wishMe();
+})
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.onresult = (event) => {
+    const current = event.resultIndex;
+    const transcript = event.results[current][0].transcript;
+    content.textContent = transcript;
+    speakThis(transcript.toLowerCase());
+}
+
+btn.addEventListener('click', ()=>{
+    recognition.start();
+})
+
+function speakThis(message) {
+    const speech = new SpeechSynthesisUtterance();
+
+    speech.text = "I did not understand what you said please try again";
+
+    if(message.includes('hey') || message.includes('hello')) {
+        const finalText = "Hello Boss";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('how are you')) {
+        const finalText = "I am fine boss tell me how can i help you";
+        speech.text = finalText;
+    }
+
+
+    else if(message.includes('name')) {
+        const finalText = "My name is SussiBot";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('thank you')) {
+        const finalText = "You're Very Welcome Boss.";
+        speech.text = finalText;
+    }
+
+    else if(message.includes("what's up")) {
+        const finalText = "I'm fine, Thank you. Now How Can i help you Boss?";
+        speech.text = finalText;
+    }
+
+    else if(message.includes("my friend is bullying me")) {
+        const finalText = "hahaha get fucked you nigga";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('love')) {
+        const finalText = "Why, Of Course";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('goodbye')) {
+        const finalText = "Goodbye, Boss";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('kill')) {
+        const finalText = "Yes, I Will Kill You Amit Marom, Im Coming to Your House, To Kislev Shivim ve arba";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('who made you')) {
+        const finalText = "adar nathan made me, i remember how he built me smart, my first version was in 2022.";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('beatbox')) {
+        const finalText = "i've been practicing this one out. boots and cats and boots and cats and boots and cats and boots and cats and boots and cats, i can do this all day. boots and cats and boots and cats and boots and cats and boots and cats and boots and cats and boots and cats";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('joke')) {
+        const finalText = "a neighbour asks me if i have water in my tap water, i said yes, and he said to me: what did you think would get out of there? Coca cola? Ha ha ha, i need to recover from this one.";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('f*** you')) {
+        const finalText = "i won't respond to that";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('you are smart')) {
+        const finalText = "aaah, thank you i'm just doing my job, boss";
+        speech.text = finalText;
+    }
+
+
+    else if(message.includes('open google')) {
+        window.open("https://google.com", "_blank");
+        const finalText = "Opening Google";
+        speech.text = finalText;
+    }
+
+        else if(message.includes('send message')) {
+        window.open("https://web.whatsapp.com/", "_blank");
+        const finalText = "Opening Whatsapp";
+        speech.text = finalText;
+    }
+
+
+    else if(message.includes('open youtube')) {
+        window.open("https://youtube.com", "_blank");
+        const finalText = "Opening Youtube";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('open instagram')) {
+        window.open("https://instagram.com", "_blank");
+        const finalText = "Opening instagram";
+        speech.text = finalText;
+    }
+
+    else if(message.includes('what is') || message.includes('who is') || message.includes('what are')) {
+        window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
+        const finalText = "This is what i found on internet regarding " + message;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('wikipedia')) {
+        window.open(`https://en.wikipedia.org/wiki/${message.replace("wikipedia", "")}`, "_blank");
+        const finalText = "This is what i found on wikipedia regarding " + message;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('youtube')) {
+        window.open(`https://www.youtube.com/${message.replace("youtube", "")}`, "_blank");
+        const finalText = "This is what i found on youtube regarding " + message;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('tiktok')) {
+        window.open(`https://www.tiktok.com/${message.replace("tiktok", "")}`, "_blank");
+        const finalText = "This is what i found on tiktok regarding " + message;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('time')) {
+        const time = new Date().toLocaleString(undefined, {hour: "numeric", minute: "numeric"})
+        const finalText = time;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('date')) {
+        const date = new Date().toLocaleString(undefined, {month: "short", day: "numeric"})
+        const finalText = date;
+        speech.text = finalText;
+    }
+
+    else if(message.includes('calculator')) {
+        window.open('https://www.calculator.net/')
+        const finalText = "Opening Calculator";
+        speech.text = finalText;
+    }
+
+    else {
+        window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
+        const finalText = "I found some information for " + message + " on google";
+        speech.text = finalText;
+    }
+
+    speech.volume = 1;
+    speech.pitch = 1;
+    speech.rate = 1;
+
+    window.speechSynthesis.speak(speech);
+}
+</script>
+</body>
+
+</html>
